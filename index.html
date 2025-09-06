@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Clase 2</title>
+</head>
+
+<body>
+    <center>
+        <h1>FORMULARIO DE REGISTRO</h1>
+        <form>
+            <img src="descarga.png" width="80px" height="80px" alt=""><br>
+            <label for="fnombre">NOMBRES: </label>
+            <input type="text" placeholder="Escriba su nombre aqui"><br><br>
+            <label for="fapellido">APELLIDOS:</label>
+            <input type="text"><br><br>
+            <label for="fdate">FECHA DE NACIMIENTO</label>
+            <input type="date"><br><br>
+            <label for="fedad">EDAD: </label>
+            <input type="number"><br><br>
+            <label for="fcorreo">CORREO: </label>
+            <input type="email"><br><br>
+            <label for="fpass">CONTRASEÑA: </label>
+            <input type="password"><br><br>
+            <label for="fpassw">REPITA CONTRASEÑA: </label>
+            <input type="password"><br><br>
+            <label for="fgenero">GENERO: </label>
+            <select name="genero" id="Genero">
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select><br><br>
+            <label for="festado">ESTADO CIVIL:</label><br><br>
+            <label for="fsol">SOLTERO</label>
+            <input type="radio" name="estado" id="m" value="m">
+            <label for="fcas">CASADO</label>
+            <input type="radio" name="estado" id="f" value="f"><br><br>
+            <label for="focupacion">OCUPACION: </label><br><br>
+            <label for="fcom">COMERCIANTE</label>
+            <input type="checkbox">
+            <label for="fpro">PROFESIONAL</label>
+            <input type="checkbox">
+            <label for="ftrab">TRABAJADOR INDEPENDIENTE</label>
+            <input type="checkbox"><br><br>
+            <label for="fimagen">SUBIR IMAGEN DE PERFIL:</label>
+            <input type="file"><br><br>
+            <label for="ftema">SELECCIONE COLOR DE TEMA DE PERFIL:</label>
+            <input type="color"><br><br>
+            <label for="comment">COMENTARIO</label>
+            <textarea name="" id=""></textarea><br><br>
+            <input type="button" value="ENVIAR">
+        </form>
+    </center>
+</body>
+<style>
+    input[type=button]:hover{
+        background-color: #45a049;
+    }
+    input[type=button]{
+        color: white;
+        background-color: #4CAF50;
+        border-radius: 4px;
+        padding: 14px;
+    }
+    form{
+        background-color: bisque;
+        border-radius: 20px;
+        padding: 30px;
+    }
+</style>
+</html>

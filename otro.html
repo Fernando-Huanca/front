@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Formulario Futurista — Heladería</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e17;
+    --card: rgba(255,255,255,.08);
+    --stroke: rgba(255,255,255,.12);
+    --text: #e9f0ff;
+    --muted: #b6c2ffcc;
+    --accent-1: #8a5cff;
+    --accent-2: #30e7ff;
+    --ok:#34d399;
+    --err:#fb7185;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Outfit",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+    color:var(--text);
+    background: radial-gradient(1200px 600px at 20% 10%, #4f46e533 0%, transparent 60%),
+                radial-gradient(1000px 700px at 80% 90%, #06b6d44a 0%, transparent 55%),
+                radial-gradient(800px 500px at 60% 30%, #ec489933 0%, transparent 60%),
+                var(--bg);
+    display:grid;
+    place-items:center;
+    padding:28px;
+  }
+  .shell{
+    width:min(680px, 100%);
+    position:relative;
+  }
+  .glow{
+    position:absolute; inset:-30px;
+    filter:blur(32px);
+    pointer-events:none;
+    background:
+      radial-gradient(300px 240px at 15% 10%, #a78bfa55 0%, transparent 65%),
+      radial-gradient(320px 260px at 85% 90%, #22d3ee44 0%, transparent 65%),
+      radial-gradient(260px 200px at 70% 25%, #f472b655 0%, transparent 70%);
+    border-radius:24px;
+  }
+  .card{
+    position:relative;
+    border-radius:24px;
+    background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.08)) ;
+    border:1px solid var(--stroke);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow:
+      0 10px 30px rgba(0,0,0,.35),
+      inset 0 0 0 1px rgba(255,255,255,.05);
+    padding:28px clamp(22px, 3.5vw, 36px);
+  }
+  .header{
+    display:flex; align-items:center; gap:14px; margin-bottom:18px;
+  }
+  .logo{
+    width:44px; height:44px; border-radius:50%;
+    display:grid; place-items:center;
+    background: conic-gradient(from 180deg at 50% 50%, var(--accent-1), var(--accent-2));
+    box-shadow:0 0 22px #8a5cff66, 0 0 40px #30e7ff33;
+  }
+  .logo svg{width:26px; height:26px; color:white; filter: drop-shadow(0 0 8px rgba(255,255,255,.65));}
+  h1{font-size:clamp(20px, 3.6vw, 28px); margin:0; letter-spacing:.3px}
+  .subtitle{margin:2px 0 0; color:var(--muted); font-weight:300; font-size:14px}
+
+  form{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  .full{grid-column:1/-1}
+  label{
+    font-size:13px; letter-spacing:.3px; color:var(--muted);
+    display:block; margin:0 0 8px 2px;
+  }
+  .field, select, .radio-row, button{
+    border-radius:14px;
+  }
+  .field, select{
+    width:100%;
+    background: rgba(8,12,22,.6);
+    border:1px solid rgba(255,255,255,.14);
+    color:var(--text);
+    padding:14px 14px;
+    outline:none;
+    transition: box-shadow .25s, border-color .25s, transform .08s ease;
+  }
+  .field::placeholder{color:#c6d1ff44}
+  .field:focus, select:focus{
+    border-color: #7dd3fc99;
+    box-shadow: 0 0 0 6px #38bdf833, 0 0 0 1px #7dd3fc;
+  }
+  .field:invalid[required]{border-color:#fb718544}
+  .hint{font-size:12px; color:#cbd5e180; margin-top:6px}
+
+  .radio-row{
+    display:flex; gap:10px; flex-wrap:wrap;
+    background: rgba(8,12,22,.6);
+    border:1px solid rgba(255,255,255,.14);
+    padding:8px; align-items:center;
+  }
+  .chip{
+    position:relative;
+  }
+  .chip input{position:absolute; opacity:0; inset:0; cursor:pointer}
+  .chip span{
+    display:inline-block; padding:10px 14px; border-radius:12px;
+    border:1px solid rgba(255,255,255,.14); color:var(--text);
+    background:rgba(255,255,255,.02);
+    transition:.2s;
+    user-select:none;
+    font-size:14px;
+  }
+  .chip input:focus + span{
+    box-shadow: 0 0 0 6px #8b5cf61f, 0 0 0 1px #a78bfa;
+  }
+  .chip input:checked + span{
+    border-color: transparent;
+    background: linear-gradient(135deg, #8a5cff, #30e7ff);
+    color:#071018;
+    box-shadow:0 0 22px #30e7ff33, inset 0 0 0 1px #ffffff22;
+    transform: translateY(-1px);
+  }
+
+  button{
+    grid-column:1/-1;
+    padding:14px 18px;
+    font-weight:700; letter-spacing:.5px;
+    border:1px solid transparent;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color:#061018;
+    cursor:pointer;
+    box-shadow:0 10px 24px #30e7ff33, 0 0 0 1px #ffffff22 inset;
+    transition: transform .08s ease, box-shadow .25s ease, filter .25s ease;
+  }
+  button:hover{filter:brightness(1.05)}
+  button:active{transform: translateY(1px)}
+  .footer-note{
+    margin-top:14px; text-align:center; color:#cbd5e166; font-size:12px;
+  }
+  @media (max-width:720px){
+    form{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+  <div class="shell">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="card">
+      <div class="header">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 11a5 5 0 1 0-10 0" />
+            <path d="M12 2v3" />
+            <path d="M5 11h14" />
+            <path d="M7 14l2 6a3 3 0 0 0 6 0l2-6" />
+          </svg>
+        </div>
+        <div>
+          <h1>Heladería Neón</h1>
+          <p class="subtitle">Únete al club de sabores del futuro</p>
+        </div>
+      </div>
+
+      <form action="#" method="post" autocomplete="on">
+        <div class="full">
+          <label for="nombre">Nombre</label>
+          <input class="field" type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+        </div>
+
+        <div>
+          <label for="correo">Correo</label>
+          <input class="field" type="email" id="correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
+        </div>
+
+        <div>
+          <label for="pass">Contraseña</label>
+          <input class="field" type="password" id="pass" name="contraseña" minlength="6" placeholder="Mínimo 6 caracteres" required>
+          <div class="hint">Usa letras y números para mayor seguridad</div>
+        </div>
+
+        <div>
+          <label for="nac">Fecha de nacimiento</label>
+          <input class="field" type="date" id="nac" name="nacimiento" required>
+        </div>
+
+        <div>
+          <label for="ocupacion">Ocupación</label>
+          <select id="ocupacion" name="ocupacion" class="field" required>
+            <option value="" selected disabled>Selecciona una opción</option>
+            <option>Estudiante</option>
+            <option>Empleado/a</option>
+            <option>Independiente</option>
+            <option>Docente</option>
+            <option>Otro</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label>Género</label>
+          <div class="radio-row">
+            <label class="chip">
+              <input type="radio" name="genero" value="femenino" required>
+              <span>Femenino</span>
+            </label>
+            <label class="chip">
+              <input type="radio" name="genero" value="masculino">
+              <span>Masculino</span>
+            </label>
+            <label class="chip">
+              <input type="radio" name="genero" value="no-binario">
+              <span>No binario</span>
+            </label>
+            <label class="chip">
+              <input type="radio" name="genero" value="prefiero-no-decirlo">
+              <span>Prefiero no decirlo</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit">ENVIAR</button>
+        <p class="footer-note">Al enviar aceptas recibir novedades heladas y promos galácticas.</p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
